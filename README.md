@@ -1,25 +1,25 @@
-# 3. Apply PCA (Full Components)
-pca_full = PCA()
-pca_full.fit(X_scaled)
+# 📉 Task 13: PCA Dimensionality Reduction
 
-# 4. Calculate Cumulative Variance
-# This tells us: "If we keep N components, how much original data do we preserve?"
-cumulative_variance = np.cumsum(pca_full.explained_variance_ratio_)
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
+![Scikit-Learn](https://img.shields.io/badge/Library-Scikit_Learn-orange?logo=scikit-learn)
 
-# 5. Plot Cumulative Variance
-plt.figure(figsize=(10, 6))
-plt.plot(cumulative_variance, linewidth=2, color='blue')
-plt.xlabel('Number of Components')
-plt.ylabel('Cumulative Explained Variance')
-plt.title('PCA Explained Variance Ratio')
-plt.grid(True)
+## 📖 Overview
+**Task 13** explores **Unsupervised Dimensionality Reduction**. We used **PCA (Principal Component Analysis)** to compress the 64-feature Digits dataset while retaining 95% of the useful information.
 
-# Add a line at 95% variance
-plt.axhline(y=0.95, color='r', linestyle='--', label='95% Variance Threshold')
-plt.legend(loc='best')
-plt.show()
+## ⚙️ Workflow
+1.  **Scaling:** Applied `StandardScaler` (Crucial step for PCA).
+2.  **Variance Analysis:** Plotted Cumulative Explained Variance to find the optimal number of components.
+3.  **Transformation:** Reduced dimensions from **64 → ~40**.
+4.  **Comparison:** Trained Logistic Regression on both Original and Reduced datasets to verify performance retention.
 
-# Find exact components needed for 95%
-n_components_95 = np.argmax(cumulative_variance >= 0.95) + 1
-print(f"Number of components needed to keep 95% variance: {n_components_95}")
-print(f"Compression: Reduced features from 64 to {n_components_95}")
+## 📊 Key Results
+* **Compression:** Reduced feature count by **~37%** while retaining **95%** variance.
+* **Accuracy:** The model trained on reduced data performed nearly identical to the full model, proving that PCA successfully removed noise without losing signal.
+
+## 🖼️ Visualizations
+| Variance Plot | 2D Projection |
+| :---: | :---: |
+| <img width="846" height="547" alt="image" src="https://github.com/user-attachments/assets/c403255b-feb5-488c-8eb3-12a4ed0e5ee7" />| <img width="991" height="790" alt="image" src="https://github.com/user-attachments/assets/9037ca0e-5dd9-45e2-9341-b912ed46a380" />|
+
+## 📂 Deliverables
+* [📓 Jupyter Notebook](./Task 13.ipynb)
